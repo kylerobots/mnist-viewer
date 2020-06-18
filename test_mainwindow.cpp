@@ -12,11 +12,16 @@ public:
 	TestMainWindow();
 	~TestMainWindow();
 
+private:
+	const int IMAGE_HEIGHT = 28;
+	const int IMAGE_WIDTH = 28;
+
 private slots:
 	void initTestCase();
 	void cleanupTestCase();
 	void cycleForward();
 	void cycleBackward();
+	void updateImage_data();
 	void updateImage();
 };
 
@@ -59,44 +64,40 @@ void TestMainWindow::cycleBackward() {
 	QVERIFY(arguments.at(0) == -1);
 }
 
-void TestMainWindow::updateImage() {
-	MainWindow test;
-	// Create fake data to display.
-	int width = 28;
-	int height = 28;
-	uchar * fake_data_first = new uchar[width * height];
-	uchar * fake_data_second = new uchar[width * height];
-	for (int i = 0; i < width * height; ++i) {
+void TestMainWindow::updateImage_data() {
+	QTest::addColumn<QImage>("image");
+	QTest::addColumn<int>("truth");
+	QTest::addColumn<int>("prediction");
+
+	uchar * fake_data_first = new uchar[IMAGE_WIDTH * IMAGE_HEIGHT];
+	uchar * fake_data_second = new uchar[IMAGE_WIDTH * IMAGE_HEIGHT];
+	for (int i = 0; i < IMAGE_WIDTH * IMAGE_HEIGHT; ++i) {
 		fake_data_first[i] = 0;
 		fake_data_second[i] = 128;
 	}
-	QImage first_image(fake_data_first, width, height, QImage::Format_Grayscale8);
-	int first_prediction = 0;
-	int first_truth = 1;
-	QImage second_image(fake_data_second, width, height, QImage::Format_Grayscale8);
-	int second_prediction = 4;
-	int second_truth = 4;
-	// Send the first data and check the labels.
-	test.displayExample(first_image, first_truth, first_prediction);
-	QCOMPARE(test.ui->truth_label->text(), QString::number(first_truth));
-	QCOMPARE(test.ui->prediction_label->text(), QString::number(first_prediction));
-	// Images are implicitly shared, so there is a chance this is still pointing to the orignal.
-	// I think that is okay though, since it means it is still definitely the right image.
-	QImage first_label_image = test.ui->image_label->pixmap()->toImage();
-	// Scale the image back to the original size, in case the GUI changes it.
-	first_label_image = first_label_image.scaled(width, height);
-	QVERIFY(!first_label_image.isNull());
-	QVERIFY(first_label_image.isGrayscale());
-	QVERIFY(first_label_image == first_image);
-	// Send the second data and check the labels.
-	test.displayExample(second_image, second_truth, second_prediction);
-	QCOMPARE(test.ui->truth_label->text(), QString::number(second_truth));
-	QCOMPARE(test.ui->prediction_label->text(), QString::number(second_prediction));
-	QImage second_label_image = test.ui->image_label->pixmap()->toImage();
-	second_label_image = second_label_image.scaled(width, height);
-	QVERIFY(!second_label_image.isNull());
-	QVERIFY(second_label_image.isGrayscale());
-	QVERIFY(second_label_image == second_image);
+	QImage first_image(fake_data_first, IMAGE_WIDTH, IMAGE_HEIGHT, QImage::Format_Grayscale8);
+	QImage second_image(fake_data_second, IMAGE_WIDTH, IMAGE_HEIGHT, QImage::Format_Grayscale8);
+
+	QTest::newRow("First") << first_image << 1 << 0;
+	QTest::newRow("Second") << second_image << 4 << 4;
+}
+
+void TestMainWindow::updateImage() {
+	MainWindow test;
+
+	QFETCH(QImage, image);
+	QFETCH(int, truth);
+	QFETCH(int, prediction);
+
+	test.displayExample(image, truth, prediction);
+	QCOMPARE(test.ui->truth_label->text(), QString::number(truth));
+	QCOMPARE(test.ui->prediction_label->text(), QString::number(prediction));
+	// Extract and scale the image back its original size.
+	QImage result_image = test.ui->image_label->pixmap()->toImage();
+	result_image = result_image.scaled(IMAGE_WIDTH, IMAGE_HEIGHT);
+	QVERIFY(!result_image.isNull());
+	QVERIFY(result_image.isGrayscale());
+	QVERIFY(result_image == image);
 }
 
 QTEST_MAIN(TestMainWindow)
