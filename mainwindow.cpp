@@ -66,6 +66,9 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::displayExample(const QImage & image, int label, int prediction) {
+	ui->image_label->setPixmap(QPixmap::fromImage(image, Qt::ImageConversionFlag::NoFormatConversion));
+	ui->truth_label->setText(QString::number(label));
+	ui->prediction_label->setText(QString::number(prediction));
 }
 
 void MainWindow::nextButtonClicked(bool checked) {
