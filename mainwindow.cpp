@@ -65,6 +65,9 @@ MainWindow::~MainWindow() {
 	delete raw_pixels;
 }
 
+void MainWindow::displayExample(const QImage & image, int label, int prediction) {
+}
+
 void MainWindow::nextButtonClicked(bool checked) {
 	emit iterateImage(1);
 	Q_UNUSED(checked);
