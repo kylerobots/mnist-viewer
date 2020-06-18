@@ -83,6 +83,8 @@ void TestMainWindow::updateImage() {
 	// Images are implicitly shared, so there is a chance this is still pointing to the orignal.
 	// I think that is okay though, since it means it is still definitely the right image.
 	QImage first_label_image = test.ui->image_label->pixmap()->toImage();
+	// Scale the image back to the original size, in case the GUI changes it.
+	first_label_image = first_label_image.scaled(width, height);
 	QVERIFY(!first_label_image.isNull());
 	QVERIFY(first_label_image.isGrayscale());
 	QVERIFY(first_label_image == first_image);
@@ -91,6 +93,7 @@ void TestMainWindow::updateImage() {
 	QCOMPARE(test.ui->truth_label->text(), QString::number(second_truth));
 	QCOMPARE(test.ui->prediction_label->text(), QString::number(second_prediction));
 	QImage second_label_image = test.ui->image_label->pixmap()->toImage();
+	second_label_image = second_label_image.scaled(width, height);
 	QVERIFY(!second_label_image.isNull());
 	QVERIFY(second_label_image.isGrayscale());
 	QVERIFY(second_label_image == second_image);
