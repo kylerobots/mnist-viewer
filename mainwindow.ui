@@ -13,8 +13,104 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
-  <widget class="QMenuBar" name="menubar"/>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="image_label">
+      <property name="text">
+       <string>Image Goes Here</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QGridLayout" name="interaction_layout">
+      <item row="1" column="1">
+       <layout class="QHBoxLayout" name="truth_hbox_layout">
+        <item>
+         <widget class="QLabel" name="truth_description_label">
+          <property name="text">
+           <string>It is actually a:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="truth_label">
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>1</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="0" column="0" rowspan="2">
+       <widget class="QPushButton" name="previous_button">
+        <property name="text">
+         <string>Previous</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <layout class="QHBoxLayout" name="prediction_hbox_layout">
+        <item>
+         <widget class="QLabel" name="prediction_description_label">
+          <property name="text">
+           <string>The network thinks this is a:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="prediction_label">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="0" column="2" rowspan="2">
+       <widget class="QPushButton" name="next_button">
+        <property name="text">
+         <string>Next</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
