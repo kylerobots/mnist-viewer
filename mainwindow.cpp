@@ -7,6 +7,8 @@
 MainWindow::MainWindow(QWidget * parent) :
 		QMainWindow(parent), ui(new Ui::MainWindow) {
 	ui->setupUi(this);
+	connect(ui->next_button, &QPushButton::clicked, this, &MainWindow::nextButtonClicked);
+	connect(ui->previous_button, &QPushButton::clicked, this, &MainWindow::previousButtonClicked);
 	// For now, just make a single image appear.
 	torch::data::datasets::MNIST dataset("C:/Users/kylem/Documents/dev/src/mnist-viewer/data/test", torch::data::datasets::MNIST::Mode::kTest);
 	torch::data::Example<torch::Tensor, torch::Tensor> example = dataset.get(1);
@@ -61,4 +63,14 @@ MainWindow::MainWindow(QWidget * parent) :
 MainWindow::~MainWindow() {
 	delete ui;
 	delete raw_pixels;
+}
+
+void MainWindow::nextButtonClicked(bool checked) {
+	emit iterateImage(1);
+	Q_UNUSED(checked);
+}
+
+void MainWindow::previousButtonClicked(bool checked) {
+	iterateImage(-1);
+	Q_UNUSED(checked);
 }

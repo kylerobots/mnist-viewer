@@ -20,6 +20,10 @@ public:
 	~MainWindow();
 
 private:
+	void nextButtonClicked(bool checked);
+	void previousButtonClicked(bool checked);
+
+private:
 	Ui::MainWindow * ui;
 	uchar * raw_pixels;
 

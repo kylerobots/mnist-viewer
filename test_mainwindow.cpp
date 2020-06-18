@@ -26,7 +26,7 @@ TestMainWindow::~TestMainWindow() {
 }
 
 void TestMainWindow::initTestCase() {
-	MainWindow test();
+	MainWindow test;
 }
 
 void TestMainWindow::cleanupTestCase() {
@@ -37,7 +37,9 @@ void TestMainWindow::cycleForward() {
 	QSignalSpy spy(&test, SIGNAL(iterateImage(int)));
 	QVERIFY(spy.isValid());
 	QTest::mouseClick(test.ui->next_button, Qt::LeftButton);
-	QVERIFY(spy.wait(1000));
+	if (spy.size() == 0) {
+		QVERIFY(spy.wait());
+	}
 	QList<QVariant> arguments = spy.takeFirst();
 	QVERIFY(arguments.at(0).type() == QVariant::Int);
 	QVERIFY(arguments.at(0) == 1);
@@ -48,7 +50,9 @@ void TestMainWindow::cycleBackward() {
 	QSignalSpy spy(&test, SIGNAL(iterateImage(int)));
 	QVERIFY(spy.isValid());
 	QTest::mouseClick(test.ui->previous_button, Qt::LeftButton);
-	QVERIFY(spy.wait(1000));
+	if (spy.size() == 0) {
+		QVERIFY(spy.wait());
+	}
 	QList<QVariant> arguments = spy.takeFirst();
 	QVERIFY(arguments.at(0).type() == QVariant::Int);
 	QVERIFY(arguments.at(0) == -1);
