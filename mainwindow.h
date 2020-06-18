@@ -13,6 +13,7 @@ QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow {
 	Q_OBJECT
+	friend class TestMainWindow;
 
 public:
 	MainWindow(QWidget * parent = nullptr);
@@ -21,5 +22,8 @@ public:
 private:
 	Ui::MainWindow * ui;
 	uchar * raw_pixels;
+
+signals:
+	void iterateImage(int difference);
 };
 #endif // MAINWINDOW_H

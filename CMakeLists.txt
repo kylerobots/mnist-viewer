@@ -21,3 +21,15 @@ add_executable(mnist-viewer
 	mainwindow.ui
 )
 target_link_libraries(mnist-viewer PRIVATE Qt5::Widgets ${TORCH_LIBRARIES})
+
+enable_testing()
+find_package(Qt5Test REQUIRED)
+
+add_executable(TestMainWindow
+	test_mainwindow.cpp
+	mainwindow.cpp
+	mainwindow.ui
+	mainwindow.h
+)
+add_test(NAME TestMainWindow COMMAND TestMainWindow)
+target_link_libraries(TestMainWindow PRIVATE Qt5::Gui Qt5::Test Qt5::Widgets ${TORCH_LIBRARIES})
