@@ -15,6 +15,7 @@ public:
 private:
 	const int IMAGE_HEIGHT = 28;
 	const int IMAGE_WIDTH = 28;
+	MainWindow test;
 
 private slots:
 	void initTestCase();
@@ -32,14 +33,12 @@ TestMainWindow::~TestMainWindow() {
 }
 
 void TestMainWindow::initTestCase() {
-	MainWindow test;
 }
 
 void TestMainWindow::cleanupTestCase() {
 }
 
 void TestMainWindow::cycleForward() {
-	MainWindow test;
 	QSignalSpy spy(&test, SIGNAL(iterateImage(int)));
 	QVERIFY(spy.isValid());
 	QTest::mouseClick(test.ui->next_button, Qt::LeftButton);
@@ -52,7 +51,6 @@ void TestMainWindow::cycleForward() {
 }
 
 void TestMainWindow::cycleBackward() {
-	MainWindow test;
 	QSignalSpy spy(&test, SIGNAL(iterateImage(int)));
 	QVERIFY(spy.isValid());
 	QTest::mouseClick(test.ui->previous_button, Qt::LeftButton);
@@ -83,8 +81,6 @@ void TestMainWindow::updateImage_data() {
 }
 
 void TestMainWindow::updateImage() {
-	MainWindow test;
-
 	QFETCH(QImage, image);
 	QFETCH(int, truth);
 	QFETCH(int, prediction);
