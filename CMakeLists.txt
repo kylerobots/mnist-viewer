@@ -19,6 +19,8 @@ add_executable(mnist-viewer
 	mainwindow.cpp
 	mainwindow.h
 	mainwindow.ui
+	network.cpp
+	network.h
 )
 target_link_libraries(mnist-viewer PRIVATE Qt5::Widgets ${TORCH_LIBRARIES})
 
@@ -34,6 +36,7 @@ target_link_libraries(TestMainWindow PRIVATE Qt5::Gui Qt5::Test Qt5::Widgets ${T
 
 add_executable(TestNetwork
 	test_network.cpp
+	network.cpp
 )
 add_test(NAME TestNetwork COMMAND TestNetwork)
-target_link_libraries(TestNetwork PRIVATE Qt5::Test ${TORCH_LIBRARIES})
+target_link_libraries(TestNetwork PRIVATE Qt5::Gui Qt5::Widgets Qt5::Test ${TORCH_LIBRARIES})
