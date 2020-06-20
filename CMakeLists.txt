@@ -31,3 +31,9 @@ add_executable(TestMainWindow
 )
 add_test(NAME TestMainWindow COMMAND TestMainWindow)
 target_link_libraries(TestMainWindow PRIVATE Qt5::Gui Qt5::Test Qt5::Widgets ${TORCH_LIBRARIES})
+
+add_executable(TestNetwork
+	test_network.cpp
+)
+add_test(NAME TestNetwork COMMAND TestNetwork)
+target_link_libraries(TestNetwork PRIVATE Qt5::Test ${TORCH_LIBRARIES})
