@@ -77,6 +77,6 @@ void MainWindow::nextButtonClicked(bool checked) {
 }
 
 void MainWindow::previousButtonClicked(bool checked) {
-	iterateImage(-1);
+	emit iterateImage(-1);
 	Q_UNUSED(checked);
 }
