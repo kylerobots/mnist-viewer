@@ -89,6 +89,7 @@ void TestMainWindow::updateImage() {
 	test.displayExample(index, image, truth, prediction);
 	QCOMPARE(test.ui->truth_label->text(), QString::number(truth));
 	QCOMPARE(test.ui->prediction_label->text(), QString::number(prediction));
+	QCOMPARE(test.ui->index_label->text(), QString("Image #") + QString::number(index));
 	// Extract and scale the image back its original size.
 	QImage result_image = test.ui->image_label->pixmap(Qt::ReturnByValueConstant()).toImage();
 	result_image = result_image.scaled(IMAGE_WIDTH, IMAGE_HEIGHT);

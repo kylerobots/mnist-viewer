@@ -16,6 +16,7 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::displayExample(int index, const QImage & image, int label, int prediction) {
+	ui->index_label->setText(QString("Image #") + QString::number(index));
 	ui->image_label->setPixmap(QPixmap::fromImage(image.scaledToHeight(800), Qt::ImageConversionFlag::NoFormatConversion));
 	ui->truth_label->setText(QString::number(label));
 	ui->prediction_label->setText(QString::number(prediction));
