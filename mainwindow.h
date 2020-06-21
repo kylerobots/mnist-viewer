@@ -1,9 +1,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "torch/torch.h"
+//#include "torch/torch.h"
 
+#include <QImage>
 #include <QMainWindow>
+#include <QPixmap>
+#include <QString>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -28,7 +31,6 @@ private:
 
 private:
 	Ui::MainWindow * ui;
-	uchar * raw_pixels;
 
 signals:
 	void iterateImage(int difference);

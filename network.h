@@ -1,7 +1,12 @@
 #ifndef NETWORK_H
 #define NETWORK_H
 
+// Qt and Libtorch both use the slots definition, cause conflicts.
+// This is a workaround suggested here:
+// https://github.com/pytorch/pytorch/issues/19405
+#undef slots
 #include "torch/torch.h"
+#define slots Q_SLOTS
 
 #include <QImage>
 #include <QObject>
