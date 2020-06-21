@@ -28,7 +28,7 @@ void Network::changeImage(int increment) {
 		increment -= data_size;
 	}
 	current_index += increment;
-	while (current_index > data_size) {
+	while (current_index >= data_size) {
 		current_index -= data_size;
 	}
 	sendImage();
