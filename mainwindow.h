@@ -21,7 +21,7 @@ public:
 	~MainWindow();
 
 public slots:
-	void displayExample(const QImage & image, int label, int prediction);
+	void displayExample(int index, const QImage & image, int label, int prediction);
 
 private:
 	void nextButtonClicked(bool checked);

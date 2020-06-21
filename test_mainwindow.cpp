@@ -62,6 +62,7 @@ void TestMainWindow::cycleBackward() {
 }
 
 void TestMainWindow::updateImage_data() {
+	QTest::addColumn<int>("index");
 	QTest::addColumn<QImage>("image");
 	QTest::addColumn<int>("truth");
 	QTest::addColumn<int>("prediction");
@@ -75,16 +76,17 @@ void TestMainWindow::updateImage_data() {
 	QImage first_image(fake_data_first, IMAGE_WIDTH, IMAGE_HEIGHT, QImage::Format_Grayscale8);
 	QImage second_image(fake_data_second, IMAGE_WIDTH, IMAGE_HEIGHT, QImage::Format_Grayscale8);
 
-	QTest::newRow("First") << first_image << 1 << 0;
-	QTest::newRow("Second") << second_image << 4 << 4;
+	QTest::newRow("First") << 0 << first_image << 1 << 0;
+	QTest::newRow("Second") << 0 << second_image << 4 << 4;
 }
 
 void TestMainWindow::updateImage() {
+	QFETCH(int, index);
 	QFETCH(QImage, image);
 	QFETCH(int, truth);
 	QFETCH(int, prediction);
 
-	test.displayExample(image, truth, prediction);
+	test.displayExample(index, image, truth, prediction);
 	QCOMPARE(test.ui->truth_label->text(), QString::number(truth));
 	QCOMPARE(test.ui->prediction_label->text(), QString::number(prediction));
 	// Extract and scale the image back its original size.

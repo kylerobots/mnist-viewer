@@ -35,20 +35,22 @@ void TestNetwork::cleanupTestCase() {
 
 void TestNetwork::cycleImage_data() {
 	QTest::addColumn<int>("increment");
+	QTest::addColumn<int>("expected_index");
 
-	QTest::newRow("Initialize") << 1;
-	QTest::newRow("+1") << 1;
-	QTest::newRow("-1") << -1;
-	QTest::newRow("0") << 0;
-	QTest::newRow("-3") << -3;
-	QTest::newRow("+20000") << 15000;
-	QTest::newRow("Max Int") << std::numeric_limits<int>::max();
-	QTest::newRow("Min Int") << std::numeric_limits<int>::min();
+	QTest::newRow("Initialize") << 1 << 1;
+	QTest::newRow("+1") << 1 << 2;
+	QTest::newRow("-1") << -1 << 1;
+	QTest::newRow("0") << 0 << 1;
+	QTest::newRow("-3") << -3 << 9999;
+	QTest::newRow("+20000") << 15000 << 4999;
+	QTest::newRow("Max Int") << std::numeric_limits<int>::max() << 0;
+	QTest::newRow("Min Int") << std::numeric_limits<int>::min() << 0;
 }
 
 void TestNetwork::cycleImage() {
 	QFETCH(int, increment);
-	QSignalSpy spy(&network, SIGNAL(example(QImage, int, int)));
+	QFETCH(int, expected_index);
+	QSignalSpy spy(&network, SIGNAL(example(int, QImage, int, int)));
 	QVERIFY(spy.isValid());
 	network.changeImage(increment);
 	if (spy.size() == 0) {
@@ -56,14 +58,19 @@ void TestNetwork::cycleImage() {
 	}
 	QList<QVariant> arguments = spy.takeFirst();
 	// Verify the types received
-	QVERIFY(arguments.at(0).type() == QVariant::Image);
-	QVERIFY(arguments.at(1).type() == QVariant::Int);
+	QVERIFY(arguments.at(0).type() == QVariant::Int);
+	QVERIFY(arguments.at(1).type() == QVariant::Image);
 	QVERIFY(arguments.at(2).type() == QVariant::Int);
-	// Both Ints should be between 0 and 9.
-	QVERIFY(arguments.at(1) >= 0 && arguments.at(1) <= 9);
-	QVERIFY(arguments.at(2) >= 0 && arguments.at(2) <= 9);
+	QVERIFY(arguments.at(3).type() == QVariant::Int);
+	// The index should match the expected value.
+	QCOMPARE(arguments.at(0).toInt(), expected_index);
+	// Both labels should be between 0 and 9.
+	int truth_label = arguments.at(2).toInt();
+	int prediction_label = arguments.at(3).toInt();
+	QVERIFY(truth_label >= 0 && truth_label <= 9);
+	QVERIFY(prediction_label >= 0 && prediction_label <= 9);
 	// Check image properties.
-	QImage image = arguments.at(0).value<QImage>();
+	QImage image = arguments.at(1).value<QImage>();
 	QVERIFY(!image.isNull());
 	QVERIFY(image.height() == 28);
 	QVERIFY(image.width() == 28);

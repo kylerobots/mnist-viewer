@@ -3,7 +3,7 @@
 Network::Network(QObject * parent) :
 		QObject(parent) {
 	data.reset(new torch::data::datasets::MNIST(DATA_PATH.toStdString(), torch::data::datasets::MNIST::Mode::kTest));
-	current_displayed_example = 0;
+	current_index = 0;
 	sendImage();
 	raw_pixels = new uchar[28 * 28];
 }
@@ -13,11 +13,13 @@ Network::~Network() {
 }
 
 void Network::changeImage(int increment) {
+	// Update the index counter, accounting for int rollover.
+
 	sendImage();
 }
 
 void Network::sendImage() {
-	torch::data::Example<torch::Tensor, torch::Tensor> current_example = data->get(current_displayed_example);
+	torch::data::Example<torch::Tensor, torch::Tensor> current_example = data->get(current_index);
 	torch::Tensor flat_data = current_example.data.flatten();
 	float * raw_data = flat_data.data<float>();
 	int64_t pixel_count = flat_data.size(0);
@@ -30,5 +32,5 @@ void Network::sendImage() {
 	}
 	QImage image(raw_pixels, 28, 28, QImage::Format_Grayscale8);
 	int label = current_example.target.item<int>();
-	emit example(image, label, label);
+	emit example(current_index, image, label, label);
 }

@@ -24,13 +24,13 @@ private:
 	void sendImage();
 
 private:
-	size_t current_displayed_example;
+	size_t current_index;
 	QScopedPointer<torch::data::datasets::MNIST> data;
 	const QString DATA_PATH = "C:/Users/kylem/Documents/dev/src/mnist-viewer/data/test";
 	uchar * raw_pixels;
 
 signals:
-	void example(QImage image, int truth, int prediction);
+	void example(int index, QImage image, int truth, int prediction);
 };
 
 #endif // NETWORK_H

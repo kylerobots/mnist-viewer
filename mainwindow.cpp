@@ -15,10 +15,11 @@ MainWindow::~MainWindow() {
 	delete ui;
 }
 
-void MainWindow::displayExample(const QImage & image, int label, int prediction) {
+void MainWindow::displayExample(int index, const QImage & image, int label, int prediction) {
 	ui->image_label->setPixmap(QPixmap::fromImage(image.scaledToHeight(800), Qt::ImageConversionFlag::NoFormatConversion));
 	ui->truth_label->setText(QString::number(label));
 	ui->prediction_label->setText(QString::number(prediction));
+	Q_UNUSED(index);
 }
 
 void MainWindow::nextButtonClicked(bool checked) {
