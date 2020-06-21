@@ -1,8 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-//#include "torch/torch.h"
-
 #include <QImage>
 #include <QMainWindow>
 #include <QPixmap>

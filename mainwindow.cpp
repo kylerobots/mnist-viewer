@@ -7,6 +7,8 @@ MainWindow::MainWindow(QWidget * parent) :
 	ui->setupUi(this);
 	connect(ui->next_button, &QPushButton::clicked, this, &MainWindow::nextButtonClicked);
 	connect(ui->previous_button, &QPushButton::clicked, this, &MainWindow::previousButtonClicked);
+	ui->truth_label->setText("");
+	ui->prediction_label->setText("");
 }
 
 MainWindow::~MainWindow() {
