@@ -41,10 +41,11 @@ void TestNetwork::cycleImage_data() {
 	QTest::newRow("+1") << 1 << 2;
 	QTest::newRow("-1") << -1 << 1;
 	QTest::newRow("0") << 0 << 1;
-	QTest::newRow("-3") << -3 << 9999;
-	QTest::newRow("+20000") << 15000 << 4999;
-	QTest::newRow("Max Int") << std::numeric_limits<int>::max() << 0;
-	QTest::newRow("Min Int") << std::numeric_limits<int>::min() << 0;
+	QTest::newRow("-3") << -3 << 9998;
+	QTest::newRow("+10000") << 10000 << 9998;
+	QTest::newRow("+20000") << 15000 << 4998;
+	QTest::newRow("Max Int") << std::numeric_limits<int>::max() << 8645;
+	QTest::newRow("Min Int") << std::numeric_limits<int>::min() << 4997;
 }
 
 void TestNetwork::cycleImage() {
@@ -77,7 +78,7 @@ void TestNetwork::cycleImage() {
 	QVERIFY(image.isGrayscale());
 	// The image should be a new one or the same, depending on if the
 	// increment is nonzero or zero.
-	if (increment == 0) {
+	if (increment % 10000 == 0) {
 		QVERIFY(image == this->image);
 	} else {
 		QVERIFY(image != this->image);
