@@ -46,6 +46,7 @@ void TestNetwork::cycleImage_data() {
 	QTest::newRow("+20000") << 15000 << 4998;
 	QTest::newRow("Max Int") << std::numeric_limits<int>::max() << 8645;
 	QTest::newRow("Min Int") << std::numeric_limits<int>::min() << 4997;
+	QTest::newRow("Exactly 10000 (so 0)") << 5003 << 0;
 }
 
 void TestNetwork::cycleImage() {
