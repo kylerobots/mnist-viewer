@@ -21,6 +21,7 @@ public slots:
 	void changeImage(int increment);
 
 private:
+	QImage convertToImage(torch::Tensor tensor);
 	void sendImage();
 
 private:
