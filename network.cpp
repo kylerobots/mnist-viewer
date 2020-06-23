@@ -3,7 +3,26 @@
 #include <iostream>
 
 Network::Network(QObject * parent) :
-		QObject(parent) {
+		QObject(parent),
+
+		network(
+				torch::nn::Conv2d(torch::nn::Conv2dOptions(1, 10, 5)),
+				torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2)),
+				torch::nn::ReLU(torch::nn::ReLUOptions()),
+
+				torch::nn::Conv2d(torch::nn::Conv2dOptions(10, 20, 5)),
+				torch::nn::Dropout2d(torch::nn::Dropout2dOptions()),
+				torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2)),
+				torch::nn::ReLU(torch::nn::ReLUOptions()) /*,
+
+				torch::nn::Linear(torch::nn::LinearOptions(320, 50)),
+				torch::nn::ReLU(torch::nn::ReLUOptions()),
+				torch::nn::Dropout(torch::nn::DropoutOptions()),
+
+				torch::nn::Linear(torch::nn::LinearOptions(50, 10)),
+				torch::nn::LogSoftmax(torch::nn::LogSoftmaxOptions(10))*/
+		) {
+	network->train(false);
 	data.reset(new torch::data::datasets::MNIST(DATA_PATH.toStdString(), torch::data::datasets::MNIST::Mode::kTest));
 	current_index = 0;
 	sendImage();
@@ -57,8 +76,9 @@ void Network::sendImage() {
 	// so add an additional dimension into the tensor.
 	torch::Tensor input = current_example.data.unsqueeze(0);
 	std::cout << input.sizes() << "\n$$$$$$$$$$$$$$" << std::endl;
-	//    torch::Tensor prediction = network->forward(current_example.data);
-	std::cout << "Done PRediction!!!!" << std::endl;
+	torch::Tensor prediction = network->forward(input);
+	std::cout << prediction.sizes() << std::endl;
+	std::cout << "Done Prediction!!!!" << std::endl;
 	QImage image = convertToImage(current_example.data);
 	int label = current_example.target.item<int>();
 	emit example(current_index, image, label, label);

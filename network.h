@@ -28,6 +28,7 @@ private:
 	size_t current_index;
 	QScopedPointer<torch::data::datasets::MNIST> data;
 	const QString DATA_PATH = "C:/Users/kylem/Documents/dev/src/mnist-viewer/data/test";
+	torch::nn::Sequential network;
 	uchar * raw_pixels;
 
 signals:
