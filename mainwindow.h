@@ -1,9 +1,10 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "torch/torch.h"
-
+#include <QImage>
 #include <QMainWindow>
+#include <QPixmap>
+#include <QString>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -20,7 +21,7 @@ public:
 	~MainWindow();
 
 public slots:
-	void displayExample(const QImage & image, int label, int prediction);
+	void displayExample(int index, const QImage & image, int label, int prediction);
 
 private:
 	void nextButtonClicked(bool checked);
@@ -28,7 +29,6 @@ private:
 
 private:
 	Ui::MainWindow * ui;
-	uchar * raw_pixels;
 
 signals:
 	void iterateImage(int difference);

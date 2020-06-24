@@ -12,15 +12,21 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
-find_package(Torch REQUIRED)
+find_package(torch REQUIRED)
 
 add_executable(mnist-viewer
 	main.cpp
 	mainwindow.cpp
 	mainwindow.h
 	mainwindow.ui
+	network.cpp
+	network.h
 )
-target_link_libraries(mnist-viewer PRIVATE Qt5::Widgets ${TORCH_LIBRARIES})
+target_link_libraries(mnist-viewer
+	PRIVATE
+	Qt5::Widgets
+	${TORCH_LIBRARIES}
+)
 
 enable_testing()
 find_package(Qt5Test REQUIRED)
@@ -29,5 +35,23 @@ add_executable(TestMainWindow
 	test_mainwindow.cpp
 	mainwindow.cpp
 )
+target_link_libraries(TestMainWindow
+	PRIVATE
+	Qt5::Test
+	Qt5::Gui
+	Qt5::Widgets
+)
 add_test(NAME TestMainWindow COMMAND TestMainWindow)
-target_link_libraries(TestMainWindow PRIVATE Qt5::Gui Qt5::Test Qt5::Widgets ${TORCH_LIBRARIES})
+
+add_executable(TestNetwork
+	test_network.cpp
+	network.cpp
+)
+target_link_libraries(TestNetwork
+	PRIVATE
+	Qt5::Test
+	Qt5::Gui
+	Qt5::Widgets
+	${TORCH_LIBRARIES}
+)
+add_test(NAME TestNetwork COMMAND TestNetwork)
