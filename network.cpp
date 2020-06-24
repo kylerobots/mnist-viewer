@@ -6,22 +6,24 @@ Network::Network(QObject * parent) :
 		QObject(parent),
 
 		network(
-				torch::nn::Conv2d(torch::nn::Conv2dOptions(1, 10, 5)),
+				torch::nn::Conv2d(torch::nn::Conv2dOptions(1, 32, 3)),
+				torch::nn::ReLU(torch::nn::ReLUOptions()),
 				torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2)),
+
+				torch::nn::Conv2d(torch::nn::Conv2dOptions(32, 64, 3)),
+				torch::nn::ReLU(torch::nn::ReLUOptions()),
+				torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2)),
+
+				torch::nn::Conv2d(torch::nn::Conv2dOptions(64, 64, 3)),
 				torch::nn::ReLU(torch::nn::ReLUOptions()),
 
-				torch::nn::Conv2d(torch::nn::Conv2dOptions(10, 20, 5)),
-				torch::nn::Dropout2d(torch::nn::Dropout2dOptions()),
-				torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2)),
-				torch::nn::ReLU(torch::nn::ReLUOptions()) /*,
+				torch::nn::Flatten(torch::nn::FlattenOptions()),
 
-				torch::nn::Linear(torch::nn::LinearOptions(320, 50)),
-				torch::nn::ReLU(torch::nn::ReLUOptions()),
-				torch::nn::Dropout(torch::nn::DropoutOptions()),
+				torch::nn::Linear(torch::nn::LinearOptions(576, 64)),
+				torch::nn::ReLU(torch::nn::ReLU()),
 
-				torch::nn::Linear(torch::nn::LinearOptions(50, 10)),
-				torch::nn::LogSoftmax(torch::nn::LogSoftmaxOptions(10))*/
-		) {
+				torch::nn::Linear(torch::nn::LinearOptions(64, 10)),
+				torch::nn::Softmax(torch::nn::SoftmaxOptions(1))) {
 	network->train(false);
 	data.reset(new torch::data::datasets::MNIST(DATA_PATH.toStdString(), torch::data::datasets::MNIST::Mode::kTest));
 	current_index = 0;
@@ -75,11 +77,10 @@ void Network::sendImage() {
 	// The inputs to the network have to be of the shape {batch_size, channels, width, height}
 	// so add an additional dimension into the tensor.
 	torch::Tensor input = current_example.data.unsqueeze(0);
-	std::cout << input.sizes() << "\n$$$$$$$$$$$$$$" << std::endl;
-	torch::Tensor prediction = network->forward(input);
-	std::cout << prediction.sizes() << std::endl;
-	std::cout << "Done Prediction!!!!" << std::endl;
+	torch::Tensor prediction_distribution = network->forward(input);
+	// Whichever index has the max value is the predicted value.
+	int prediction = prediction_distribution.argmax(1).item<int>();
 	QImage image = convertToImage(current_example.data);
 	int label = current_example.target.item<int>();
-	emit example(current_index, image, label, label);
+	emit example(current_index, image, label, prediction);
 }
