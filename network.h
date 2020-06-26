@@ -76,7 +76,7 @@ private:
 	 * 
 	 * This loads the image at index value \ref current_index, then uses \ref network
 	 * to make a prediction about the data. It also calls \ref convertToImage to create
-	 * a \ref QImage. All this information is then sent out on the signal.
+	 * a QImage. All this information is then sent out on the signal.
 	 */
 	void sendImage();
 

@@ -68,7 +68,7 @@ private:
 
 private:
 	/*!
-	 * \brief The pointer to the GUI elements generated from the \ref mainwindow.ui file.
+	 * \brief The pointer to the GUI elements generated from the mainwindow.ui file.
 	 */
 	Ui::MainWindow * ui;
 
