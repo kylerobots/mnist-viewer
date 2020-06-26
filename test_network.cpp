@@ -5,6 +5,9 @@
 #include <QtGui/QImage>
 #include <limits>
 
+/*!
+ * \brief The TestNetwork class is used to test \ref Network.
+ */
 class TestNetwork : public QObject {
 	Q_OBJECT
 public:
@@ -12,13 +15,53 @@ public:
 	~TestNetwork();
 
 private:
+	/*!
+	 * \brief The \ref Network under test.
+	 */
 	Network network;
+	/*!
+	 * \brief A QImage member to store example images between
+	 * iterations to ensure they are updating.
+	 */
 	QImage image;
 
 private slots:
+	/*!
+	 * \brief initTestCase runs at the start of the test.
+	 */
 	void initTestCase();
+	/*!
+	 * \brief cleanupTestCase runs at the end of the test.
+	 */
 	void cleanupTestCase();
+	/*!
+	 * \test This tests that the example is incremented to the
+	 * correct index when the \ref Network::changeImage slot is
+	 * called.
+	 * 
+	 * The tests are:
+	 * 1. Just initialize the image, since that isn't guaranteed.
+	 * 2. Increment forward one.
+	 * 3. Decrement backward one.
+	 * 4. Make no change.
+	 * 5. Decrement enough to wrap around to the end of the dataset.
+	 * 6. Increment a whole dataset's worth so the index is unchanged.
+	 * 7. Increment some arbitrarily large number.
+	 * 8. Increment the maximum value of an int.
+	 * 9. Decrement the minimum value of an int.
+	 * 10. Increment enough to be the exact size of the data, which should wrap around to 0.
+	 * 
+	 * In each case, the properties of the emitted \ref Network::example signal are checked
+	 * for the right data types. Additionally, some properties about the image are checked as
+	 * well. Lastly, the image is checked against the previous one to see if it should or
+	 * should not be different.
+	 * 
+	 * This uses the logic in \ref cycleImage.
+	 */
 	void cycleImage_data();
+	/*!
+	 * \brief The method that actually makes the comparisions in \ref cycleImage_data.
+	 */
 	void cycleImage();
 };
 TestNetwork::TestNetwork() {
