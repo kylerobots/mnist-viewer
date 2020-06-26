@@ -3,6 +3,15 @@
 
 #include <QApplication>
 
+/*!
+ * \brief The main function for the mnist-viewer executable
+ * \param argc
+ * \param argv
+ * \return 
+ * 
+ * This creates the \ref MainWindow GUI, creates the \ref Network backend, and connects
+ * the two via the appropriate slots and signals.
+ */
 int main(int argc, char * argv[]) {
 	QApplication a(argc, argv);
 	MainWindow w;
