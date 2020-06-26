@@ -5,6 +5,9 @@
 #include <QSignalSpy>
 #include <QtTest>
 
+/*!
+ * \brief The TestMainWindow class is used to test \ref MainWindow and its GUI.
+ */
 class TestMainWindow : public QObject {
 	Q_OBJECT
 public:
@@ -12,16 +15,57 @@ public:
 	~TestMainWindow();
 
 private:
+	/*!
+	 * \brief The assumed image height for all data points.
+	 */
 	const int IMAGE_HEIGHT = 28;
+	/*!
+	 * \brief The assumed image width for all data points.
+	 */
 	const int IMAGE_WIDTH = 28;
+	/*!
+	 * \brief The class under test.
+	 */
 	MainWindow test;
 
 private slots:
+	/*!
+	 * \brief initTestCase runs at the start of the test.
+	 */
 	void initTestCase();
+	/*!
+	 * \brief cleanupTestCase runs at the end of the test.
+	 */
 	void cleanupTestCase();
+	/*!
+	 * \test This test clicks the next button on the GUI and makes sure that an
+	 * iteration value of 1 is emitted on the \ref MainWindow::iterateImage signal.
+	 */
 	void cycleForward();
+	/*!
+	 * \test This test clicks the previous button on the GUI and makes sure that an
+	 * iteration value of -1 is emitted on the \ref MainWindow::iterateImage signal.
+	 */
 	void cycleBackward();
+	/*!
+	 * \test This tests that when an example is received on \ref MainWindow::displayExample,
+	 * all the appropriate labels are updated.
+	 * 
+	 * This includes the:
+	 * - Image label
+	 * - Truth label
+	 * - Prediction label
+	 * - Index label
+	 * 
+	 * The test sends two images to make sure that all the values update each time, particularly
+	 * the image, since it will implicitly share its data.
+	 * 
+	 * This uses the logic in \ref updateImage.
+	 */
 	void updateImage_data();
+	/*!
+	 * \brief The method that actually makes the comparisions in \ref updateImage_data.
+	 */
 	void updateImage();
 };
 
