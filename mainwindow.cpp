@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget * parent) :
 	ui->setupUi(this);
 	connect(ui->next_button, &QPushButton::clicked, this, &MainWindow::nextButtonClicked);
 	connect(ui->previous_button, &QPushButton::clicked, this, &MainWindow::previousButtonClicked);
+	connect(ui->train_button, &QPushButton::clicked, this, &MainWindow::trainButtonClicked);
 	ui->truth_label->setText("");
 	ui->prediction_label->setText("");
 }
@@ -31,4 +32,8 @@ void MainWindow::nextButtonClicked(bool checked) {
 void MainWindow::previousButtonClicked(bool checked) {
 	emit iterateImage(-1);
 	Q_UNUSED(checked);
+}
+
+void MainWindow::trainButtonClicked(bool checked) {
+	emit startTraining(1, 1);
 }

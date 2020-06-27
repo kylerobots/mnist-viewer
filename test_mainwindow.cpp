@@ -67,6 +67,10 @@ private slots:
 	 * \brief The method that actually makes the comparisions in \ref updateImage_data.
 	 */
 	void updateImage();
+	/*!
+     * \test This tests that the GUI sends the right batch size and number of epochs to train on.
+     * */
+	void callTraining();
 };
 
 TestMainWindow::TestMainWindow() {
@@ -140,6 +144,20 @@ void TestMainWindow::updateImage() {
 	QVERIFY(!result_image.isNull());
 	QVERIFY(result_image.isGrayscale());
 	QVERIFY(result_image == image);
+}
+
+void TestMainWindow::callTraining() {
+	QSignalSpy spy(&test, SIGNAL(startTraining(unsigned int, unsigned int)));
+	QVERIFY(spy.isValid());
+	QTest::mouseClick(test.ui->train_button, Qt::LeftButton);
+	if (spy.size() == 0) {
+		QVERIFY(spy.wait());
+	}
+	QList<QVariant> arguments = spy.takeFirst();
+	QVERIFY(arguments.at(0).type() == QVariant::UInt);
+	QVERIFY(arguments.at(1).type() == QVariant::UInt);
+	QVERIFY(arguments.at(0) == 1);
+	QVERIFY(arguments.at(1) == 1);
 }
 
 QTEST_MAIN(TestMainWindow)

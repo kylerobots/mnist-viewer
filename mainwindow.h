@@ -62,9 +62,17 @@ private:
 	 * \brief Called when the previous button emits a clicked event.
 	 * 
 	 * This method will emit a \ref iterateImage signal with a value of -1.
-	 * \param checked *Unused* If the button is dperessed or not.
+	 * \param checked *Unused* If the button is deperessed or not.
 	 */
 	void previousButtonClicked(bool checked);
+	/*!
+     * \brief Called when the training button emits a clicked event.
+     * 
+     * This method will emit a \ref startTraining signal. Currently, it
+     * will only request a batch size of one with an epoch of one.
+     * \param checked *Unused* If the button is depressed or not.
+     */
+	void trainButtonClicked(bool checked);
 
 private:
 	/*!
@@ -81,5 +89,11 @@ signals:
 	 * \param difference The amount to increment the displayed image by.
 	 */
 	void iterateImage(int difference);
+	/*!
+     * \brief Signals the connected \ref Network object to train the network.
+     * \param batch_size The number of examples in each batch.
+     * \param epochs The number of iterations to train on.
+     */
+	void startTraining(unsigned int batch_size, unsigned int epochs);
 };
 #endif // MAINWINDOW_H
