@@ -63,6 +63,23 @@ private slots:
 	 * \brief The method that actually makes the comparisions in \ref cycleImage_data.
 	 */
 	void cycleImage();
+	/*!
+     * \test This tests that the network properly trains the itself and emits progress
+     * updates.
+     * 
+     * The test cases are:
+     * 1. **No data size:** The network will immediately return without training.
+     * 2. **No epochs:** The network will immediately return without training.
+     * 3. **One datapoint and one epoch:** The network will train as expected.
+     * 4. **>Max datapoints and one epoch:** The network will use the full dataset to train.
+     * 
+     * This uses the logic in \ref train.
+     */
+	void train_data();
+	/*!
+     * \brief The method that actually makes the comparisons in \ref train_data.
+     */
+	void train();
 };
 TestNetwork::TestNetwork() {
 }
@@ -129,6 +146,44 @@ void TestNetwork::cycleImage() {
 	}
 	// Update the stored image.
 	this->image = image.copy();
+}
+
+void TestNetwork::train_data() {
+	QTest::addColumn<unsigned int>("data_size");
+	QTest::addColumn<unsigned int>("epoch_number");
+	QTest::addColumn<bool>("is_expected_loss_zero");
+
+	QTest::newRow("No data") << static_cast<uint>(0) << static_cast<uint>(1) << true;
+	QTest::newRow("No epochs") << static_cast<uint>(1) << static_cast<uint>(0) << true;
+	QTest::newRow("One each") << static_cast<uint>(1) << static_cast<uint>(1) << false;
+	QTest::newRow("Max data") << static_cast<uint>(15000) << static_cast<uint>(1) << false;
+}
+
+void TestNetwork::train() {
+	QFETCH(unsigned int, data_size);
+	QFETCH(unsigned int, epoch_number);
+	QFETCH(bool, is_expected_loss_zero);
+
+	QSignalSpy spy(&network, SIGNAL(trainingUpdate(unsigned int, unsigned int, float)));
+	QVERIFY(spy.isValid());
+	QBENCHMARK {
+		network.startTraining(data_size, epoch_number);
+	}
+	if (spy.size() == 0) {
+		// Training can take some time, so increase the wait.
+		QVERIFY(spy.wait(30000));
+	}
+	QList<QVariant> arguments = spy.takeFirst();
+	// The total epochs should match.
+	QCOMPARE(arguments.at(1).toUInt(), epoch_number);
+	// The value of the loss function will depend on the case.
+	// This assumes that if training runs, it is impossible to have
+	// a perfect training session with loss of zero.
+	if (is_expected_loss_zero) {
+		QCOMPARE(arguments.at(2).toFloat(), 0.0);
+	} else {
+		QVERIFY(arguments.at(2).toFloat() != 0.0);
+	}
 }
 
 QTEST_MAIN(TestNetwork)

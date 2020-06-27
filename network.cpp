@@ -55,6 +55,10 @@ void Network::changeImage(int increment) {
 	sendImage();
 }
 
+void Network::startTraining(unsigned int batch_size, unsigned int epochs) {
+	emit trainingUpdate(static_cast<uint>(0), static_cast<uint>(0), 0.0);
+}
+
 QImage Network::convertToImage(at::Tensor tensor) {
 	torch::Tensor flat_tensor = tensor.flatten();
 	float * raw_data = flat_tensor.data<float>();
