@@ -8,8 +8,10 @@
 #include "torch/torch.h"
 #define slots Q_SLOTS
 
+#include <QCoreApplication>
 #include <QImage>
 #include <QObject>
+#include <QtCore/qmath.h>
 
 /*!
 \class Network
@@ -104,7 +106,7 @@ private:
 	/*!
 	 * \brief The hard coded location of the dataset file.
 	 */
-	const QString DATA_PATH = "C:/Users/kylem/Documents/dev/src/mnist-viewer/data/test";
+	const QString DATA_PATH = "C:/Users/kylem/Documents/dev/src/mnist-viewer/data";
 	/*!
 	 * \brief The MNIST network that does the prediction.
 	 */
@@ -131,7 +133,7 @@ signals:
      * \param total_epochs The total number of epochs to trair for.
      * \param latest_loss The loss value calculated for the just completed epoch.
      */
-	void trainingUpdate(unsigned int epoch, unsigned int total_epochs, float latest_loss);
+	void trainingUpdate(unsigned int batch, unsigned int total_batches, unsigned int epoch, unsigned int total_epochs, float latest_loss);
 };
 
 #endif // NETWORK_H

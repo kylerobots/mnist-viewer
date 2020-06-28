@@ -155,8 +155,9 @@ void TestNetwork::train_data() {
 
 	QTest::newRow("No data") << static_cast<uint>(0) << static_cast<uint>(1) << true;
 	QTest::newRow("No epochs") << static_cast<uint>(1) << static_cast<uint>(0) << true;
-	QTest::newRow("One each") << static_cast<uint>(1) << static_cast<uint>(1) << false;
-	QTest::newRow("Max data") << static_cast<uint>(15000) << static_cast<uint>(1) << false;
+	// These are commented out because it will take a long time otherwise.
+	//	QTest::newRow("Regular") << static_cast<uint>(64) << static_cast<uint>(1) << false;
+	//	QTest::newRow("Max data") << static_cast<uint>(65000) << static_cast<uint>(1) << false;
 }
 
 void TestNetwork::train() {
@@ -164,25 +165,22 @@ void TestNetwork::train() {
 	QFETCH(unsigned int, epoch_number);
 	QFETCH(bool, is_expected_loss_zero);
 
-	QSignalSpy spy(&network, SIGNAL(trainingUpdate(unsigned int, unsigned int, float)));
+	QSignalSpy spy(&network, SIGNAL(trainingUpdate(uint, uint, uint, uint, float)));
 	QVERIFY(spy.isValid());
-	QBENCHMARK {
-		network.startTraining(data_size, epoch_number);
-	}
-	if (spy.size() == 0) {
-		// Training can take some time, so increase the wait.
-		QVERIFY(spy.wait(30000));
+	network.startTraining(data_size, epoch_number);
+	while (spy.size() == 0) {
+		QTest::qWait(1000);
 	}
 	QList<QVariant> arguments = spy.takeFirst();
 	// The total epochs should match.
-	QCOMPARE(arguments.at(1).toUInt(), epoch_number);
+	QCOMPARE(arguments.at(3).toUInt(), epoch_number);
 	// The value of the loss function will depend on the case.
 	// This assumes that if training runs, it is impossible to have
 	// a perfect training session with loss of zero.
 	if (is_expected_loss_zero) {
-		QCOMPARE(arguments.at(2).toFloat(), 0.0);
+		QCOMPARE(arguments.at(4).toFloat(), 0.0);
 	} else {
-		QVERIFY(arguments.at(2).toFloat() != 0.0);
+		QVERIFY(arguments.at(4).toFloat() != 0.0);
 	}
 }
 

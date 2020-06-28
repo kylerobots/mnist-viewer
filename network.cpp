@@ -23,7 +23,7 @@ Network::Network(QObject * parent) :
 				torch::nn::ReLU(torch::nn::ReLU()),
 
 				torch::nn::Linear(torch::nn::LinearOptions(64, 10)),
-				torch::nn::Softmax(torch::nn::SoftmaxOptions(1))) {
+				torch::nn::LogSoftmax(torch::nn::LogSoftmaxOptions(1))) {
 	network->train(false);
 	data.reset(new torch::data::datasets::MNIST(DATA_PATH.toStdString(), torch::data::datasets::MNIST::Mode::kTest));
 	current_index = 0;
@@ -56,7 +56,42 @@ void Network::changeImage(int increment) {
 }
 
 void Network::startTraining(unsigned int batch_size, unsigned int epochs) {
-	emit trainingUpdate(static_cast<uint>(0), static_cast<uint>(0), 0.0);
+	// No need to do anything if either value is zero.
+	if (batch_size == 0 || epochs == 0) {
+		emit trainingUpdate(1, 1, epochs, epochs, 0.0);
+		return;
+	}
+	network->train(true);
+	// This will be a little hacky in that it opens up the dataset seperate from
+	// the one done at object instantiation. This is to swap the mode.
+	auto train_data = torch::data::datasets::MNIST(DATA_PATH.toStdString(), torch::data::datasets::MNIST::Mode::kTrain).map(torch::data::transforms::Stack<>());
+	// Estimate about how many batches will be run each epoch.
+	uint batches = qCeil(train_data.size().value() / static_cast<double>(batch_size));
+	torch::data::DataLoaderOptions options;
+	options.batch_size(batch_size);
+	options.workers(2);
+	auto data_loader = torch::data::make_data_loader(std::move(train_data), options);
+	// Create the optimizer functions
+	torch::optim::RMSprop optimizer(network->parameters(), torch::optim::RMSpropOptions());
+	// Do the training
+	for (int64_t epoch = 1; epoch <= epochs; ++epoch) {
+		torch::Tensor loss;
+		uint batch_index = 1;
+		for (torch::data::Example<> & batch : *data_loader) {
+			network->zero_grad();
+			torch::Tensor images = batch.data;
+			torch::Tensor labels = batch.target;
+			torch::Tensor predictions = network->forward(images);
+			loss = torch::nll_loss(predictions, labels);
+			loss.backward();
+			optimizer.step();
+			emit trainingUpdate(batch_index, batches, static_cast<uint>(epoch), epochs, loss.item<float>());
+			// Process this update so the user actually sees progress.
+			QCoreApplication::processEvents();
+			batch_index++;
+		}
+	}
+	network->train(false);
 }
 
 QImage Network::convertToImage(at::Tensor tensor) {
