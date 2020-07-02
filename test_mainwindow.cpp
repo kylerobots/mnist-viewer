@@ -156,7 +156,7 @@ void TestMainWindow::callTraining() {
 	QList<QVariant> arguments = spy.takeFirst();
 	QVERIFY(arguments.at(0).type() == QVariant::UInt);
 	QVERIFY(arguments.at(1).type() == QVariant::UInt);
-	QVERIFY(arguments.at(0) == 1);
+	QVERIFY(arguments.at(0) == 64);
 	QVERIFY(arguments.at(1) == 1);
 }
 
