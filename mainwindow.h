@@ -93,7 +93,7 @@ private:
 	/*!
      * \brief The pointer to hold the secondary gui to display training progress.
      */
-	TrainingProgress * training_window;
+	QScopedPointer<TrainingProgress> training_window;
 	/*!
 	 * \brief The pointer to the GUI elements generated from the mainwindow.ui file.
 	 */

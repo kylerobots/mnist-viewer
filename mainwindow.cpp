@@ -14,7 +14,6 @@ MainWindow::MainWindow(QWidget * parent) :
 
 MainWindow::~MainWindow() {
 	delete ui;
-	delete training_window;
 }
 
 void MainWindow::displayExample(int index, const QImage & image, int label, int prediction) {
@@ -26,11 +25,11 @@ void MainWindow::displayExample(int index, const QImage & image, int label, int 
 }
 
 void MainWindow::trainingUpdate(unsigned int batch, unsigned int total_batches, unsigned int epoch, unsigned int total_epochs, float latest_loss) {
-	if (training_window == nullptr) {
-		training_window = new TrainingProgress(this);
+	if (training_window.isNull()) {
+		training_window.reset(new TrainingProgress(total_batches, total_epochs, this));
 		training_window->show();
 	}
-
+	training_window->update(batch, epoch, latest_loss);
 	if (batch == total_batches && epoch == total_epochs) {
 		training_window->hide();
 		training_window->deleteLater();
@@ -48,5 +47,5 @@ void MainWindow::previousButtonClicked(bool checked) {
 }
 
 void MainWindow::trainButtonClicked(bool checked) {
-	emit startTraining(1, 1);
+	emit startTraining(64, 1);
 }
