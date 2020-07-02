@@ -28,11 +28,6 @@ Network::Network(QObject * parent) :
 	data.reset(new torch::data::datasets::MNIST(DATA_PATH.toStdString(), torch::data::datasets::MNIST::Mode::kTest));
 	current_index = 0;
 	sendImage();
-	raw_pixels = new uchar[28 * 28];
-}
-
-Network::~Network() {
-	delete raw_pixels;
 }
 
 void Network::changeImage(int increment) {

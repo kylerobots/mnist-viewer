@@ -47,7 +47,6 @@ public:
 	 * \param parent A parent QObject class, as is usual for any class that inherits it.
 	 */
 	explicit Network(QObject * parent = nullptr);
-	~Network();
 
 public slots:
 	/*!
@@ -111,10 +110,6 @@ private:
 	 * \brief The MNIST network that does the prediction.
 	 */
 	torch::nn::Sequential network;
-	/*!
-	 * \brief A pointer used in \ref convertToImage to translate from Tensor values to QImage.
-	 */
-	uchar * raw_pixels;
 
 signals:
 	/*!
