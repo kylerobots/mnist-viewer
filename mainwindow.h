@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "trainingprogress.h"
+
 #include <QImage>
 #include <QMainWindow>
 #include <QPixmap>
@@ -49,6 +51,19 @@ public slots:
 	 * \param prediction The network predicted label.
 	 */
 	void displayExample(int index, const QImage & image, int label, int prediction);
+	/*!
+     * \brief Called when an update has been received by the training network.
+     * 
+     * This will update or create the progress bar GUI with the latest info. When
+     * it is shown that the training is complete (batch == total_batches && epoch == total_epochs),
+     * the window will close.
+     * \param batch The current batch number within this epoch.
+     * \param total_batches The total batches for a given epoch.
+     * \param epoch The current epoch.
+     * \param total_epochs The total epochs for which this will run.
+     * \param latest_loss The latest loss value from the network.
+     */
+	void trainingUpdate(unsigned int batch, unsigned int total_batches, unsigned int epoch, unsigned int total_epochs, float latest_loss);
 
 private:
 	/*!
@@ -75,6 +90,10 @@ private:
 	void trainButtonClicked(bool checked);
 
 private:
+	/*!
+     * \brief The pointer to hold the secondary gui to display training progress.
+     */
+	TrainingProgress * training_window;
 	/*!
 	 * \brief The pointer to the GUI elements generated from the mainwindow.ui file.
 	 */
