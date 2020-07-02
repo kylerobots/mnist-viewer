@@ -8,8 +8,10 @@
 #include "torch/torch.h"
 #define slots Q_SLOTS
 
+#include <QCoreApplication>
 #include <QImage>
 #include <QObject>
+#include <QtCore/qmath.h>
 
 /*!
 \class Network
@@ -59,6 +61,18 @@ public slots:
 	 * prediction is still made and an image emitted.
 	 */
 	void changeImage(int increment);
+	/*!
+     * \brief The slot that requests to train the network on training data.
+     * 
+     * This will cause the network to run some training. It will create a DataLoader for the
+     * dataset, establish optimization and loss functions, then run for the requested number
+     * of epochs. During this time, progress will be output using the \ref trainingUpdate
+     * signal. Completion will also be signalled using the same means.
+     * \param batch_size How many datapoints to include in each iteration. If this is larger
+     * than the dataset, it is assumed to be the dataset.
+     * \param epochs The number of epochs to run for.
+     */
+	void startTraining(unsigned int batch_size, unsigned int epochs);
 
 private:
 	/*!
@@ -92,7 +106,7 @@ private:
 	/*!
 	 * \brief The hard coded location of the dataset file.
 	 */
-	const QString DATA_PATH = "C:/Users/kylem/Documents/dev/src/mnist-viewer/data/test";
+	const QString DATA_PATH = "C:/Users/kylem/Documents/dev/src/mnist-viewer/data";
 	/*!
 	 * \brief The MNIST network that does the prediction.
 	 */
@@ -111,6 +125,15 @@ signals:
 	 * \param prediction The predicted label from \ref network.
 	 */
 	void example(int index, QImage image, int truth, int prediction);
+	/*!
+     * \brief A signal that periodically emits to showcase training progress.
+     * 
+     * Training is signalled to be complete when epoch == total_epochs.
+     * \param epoch The epoch number that just completed.
+     * \param total_epochs The total number of epochs to trair for.
+     * \param latest_loss The loss value calculated for the just completed epoch.
+     */
+	void trainingUpdate(unsigned int batch, unsigned int total_batches, unsigned int epoch, unsigned int total_epochs, float latest_loss);
 };
 
 #endif // NETWORK_H

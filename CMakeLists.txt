@@ -21,6 +21,9 @@ add_executable(mnist-viewer
 	mainwindow.ui
 	network.cpp
 	network.h
+	trainingprogress.cpp
+	trainingprogress.h
+	trainingprogress.ui
 )
 target_link_libraries(mnist-viewer
 	PRIVATE
@@ -34,6 +37,7 @@ find_package(Qt5Test REQUIRED)
 add_executable(TestMainWindow
 	test_mainwindow.cpp
 	mainwindow.cpp
+	trainingprogress.cpp
 )
 target_link_libraries(TestMainWindow
 	PRIVATE
