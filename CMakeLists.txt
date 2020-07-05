@@ -56,8 +56,8 @@ target_link_libraries(mnist-viewer
 #	${TORCH_LIBRARIES}
 )
 
-#enable_testing()
-#find_package(Qt5Test REQUIRED)
+enable_testing()
+find_package(Qt5Test REQUIRED)
 
 #add_executable(TestMainWindow
 #	test_mainwindow.cpp
@@ -72,15 +72,14 @@ target_link_libraries(mnist-viewer
 #)
 #add_test(NAME TestMainWindow COMMAND TestMainWindow)
 
-#add_executable(TestNetwork
-#	test_network.cpp
-#	network.cpp
-#)
-#target_link_libraries(TestNetwork
-#	PRIVATE
-#	Qt5::Test
-#	Qt5::Gui
-#	Qt5::Widgets
-#	${TORCH_LIBRARIES}
-#)
-#add_test(NAME TestNetwork COMMAND TestNetwork)
+add_executable(TestNetwork
+	test_network.cpp
+)
+target_link_libraries(TestNetwork
+	PRIVATE
+	network
+	Qt5::Test
+	Qt5::Gui
+	Qt5::Widgets
+)
+add_test(NAME TestNetwork COMMAND TestNetwork)
