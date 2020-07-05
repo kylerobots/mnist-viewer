@@ -124,6 +124,8 @@ signals:
      * \brief A signal that periodically emits to showcase training progress.
      * 
      * Training is signalled to be complete when epoch == total_epochs.
+     * \param batch The batch number that just completed.
+     * \param total_batches The approximate total batches that will be run each epoch.
      * \param epoch The epoch number that just completed.
      * \param total_epochs The total number of epochs to trair for.
      * \param latest_loss The loss value calculated for the just completed epoch.
