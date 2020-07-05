@@ -1,0 +1,5 @@
+<map id="MainWindow::displayExample" name="MainWindow::displayExample">
+<area shape="rect" id="node1" title="Receive an image, its actual label, and its predicted label for publishing to the screen." alt="" coords="256,31,452,57"/>
+<area shape="rect" id="node2" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title="The main function for the mnist&#45;viewer executable." alt="" coords="81,5,132,32"/>
+<area shape="rect" id="node3" href="$class_test_main_window.html#abfd4591c6cf9af812523eeb524b0cfba" title="The method that actually makes the comparisions in updateImage_data." alt="" coords="5,56,208,83"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="Network::example" name="Network::example">
+<area shape="rect" id="node1" title="A signal containing a new example and associated labels." alt="" coords="612,31,739,57"/>
+<area shape="rect" id="node2" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title="The main function for the mnist&#45;viewer executable." alt="" coords="64,5,115,32"/>
+<area shape="rect" id="node3" href="$class_network.html#ae438d2367e76e8367ea63cf40a654006" title="The method to predict the image and output a example signal." alt="" coords="424,56,564,83"/>
+<area shape="rect" id="node4" href="$class_network.html#adeeef709062e797fcf1a0e6d8cd18810" title="The slot that records when a new image should be predicted and displayed." alt="" coords="221,56,376,83"/>
+<area shape="rect" id="node6" href="$class_network.html#a0b2a0282570fcc47174e80030d0672e9" title="The default constructor." alt="" coords="237,107,361,133"/>
+<area shape="rect" id="node5" href="$class_test_network.html#a5ce9462bbb76d44200314f1e863d92bc" title="The method that actually makes the comparisions in cycleImage_data." alt="" coords="5,56,173,83"/>
+</map>

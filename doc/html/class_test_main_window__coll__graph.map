@@ -1,0 +1,6 @@
+<map id="TestMainWindow" name="TestMainWindow">
+<area shape="rect" id="node1" title="The TestMainWindow class is used to test MainWindow and its GUI." alt="" coords="5,171,127,197"/>
+<area shape="rect" id="node2" title=" " alt="" coords="9,81,80,108"/>
+<area shape="rect" id="node3" href="$class_main_window.html" title="The MainWindow class is used to hold the GUI elements of the project." alt="" coords="105,81,201,108"/>
+<area shape="rect" id="node4" title=" " alt="" coords="99,5,206,32"/>
+</map>

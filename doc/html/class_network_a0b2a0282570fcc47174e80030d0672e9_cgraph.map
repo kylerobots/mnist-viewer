@@ -1,0 +1,5 @@
+<map id="Network::Network" name="Network::Network">
+<area shape="rect" id="node1" title="The default constructor." alt="" coords="5,5,129,32"/>
+<area shape="rect" id="node2" href="$class_network.html#ae438d2367e76e8367ea63cf40a654006" title="The method to predict the image and output a example signal." alt="" coords="177,5,317,32"/>
+<area shape="rect" id="node3" href="$class_network.html#a918e8764ff7d1ec1075b4d7c03cbc637" title="Takes a Tensor and converts it into a QImage." alt="" coords="365,5,532,32"/>
+</map>
