@@ -17,12 +17,12 @@ int main(int argc, char * argv[]) {
 	MainWindow w;
 	Network network;
 	// Connect the front end to the back end.
-	a.connect(&w, &MainWindow::iterateImage, &network, &Network::changeImage);
-	a.connect(&network, &Network::example, &w, &MainWindow::displayExample);
-	a.connect(&w, &MainWindow::startTraining, &network, &Network::startTraining);
-	a.connect(&network, &Network::trainingUpdate, &w, &MainWindow::trainingUpdate);
+	//	a.connect(&w, &MainWindow::iterateImage, &network, &Network::changeImage);
+	//	a.connect(&network, &Network::example, &w, &MainWindow::displayExample);
+	//	a.connect(&w, &MainWindow::startTraining, &network, &Network::startTraining);
+	//	a.connect(&network, &Network::trainingUpdate, &w, &MainWindow::trainingUpdate);
 	// The image is only sent when a change is triggered, so manually trigger the first one.
-	network.changeImage(0);
+	//	network.changeImage(0);
 	w.show();
 	return a.exec();
 }

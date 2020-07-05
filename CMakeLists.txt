@@ -14,48 +14,62 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 find_package(torch REQUIRED)
 
-add_executable(mnist-viewer
-	main.cpp
+add_library(gui
 	mainwindow.cpp
 	mainwindow.h
 	mainwindow.ui
+#	trainingprogress.cpp
+#	trainingprogress.h
+#	trainingprogress.ui
+)
+target_link_libraries(gui
+	PRIVATE
+	Qt5::Widgets
+)
+
+add_executable(mnist-viewer
+	main.cpp
+#	mainwindow.cpp
+#	mainwindow.h
+#	mainwindow.ui
 	network.cpp
 	network.h
-	trainingprogress.cpp
-	trainingprogress.h
-	trainingprogress.ui
+#	trainingprogress.cpp
+#	trainingprogress.h
+#	trainingprogress.ui
 )
 target_link_libraries(mnist-viewer
 	PRIVATE
+	gui
 	Qt5::Widgets
 	${TORCH_LIBRARIES}
 )
 
-enable_testing()
-find_package(Qt5Test REQUIRED)
+#enable_testing()
+#find_package(Qt5Test REQUIRED)
 
-add_executable(TestMainWindow
-	test_mainwindow.cpp
-	mainwindow.cpp
-	trainingprogress.cpp
-)
-target_link_libraries(TestMainWindow
-	PRIVATE
-	Qt5::Test
-	Qt5::Gui
-	Qt5::Widgets
-)
-add_test(NAME TestMainWindow COMMAND TestMainWindow)
+#add_executable(TestMainWindow
+#	test_mainwindow.cpp
+#	mainwindow.cpp
+#	trainingprogress.cpp
+#)
+#target_link_libraries(TestMainWindow
+#	PRIVATE
+#	Qt5::Test
+#	Qt5::Gui
+#	Qt5::Widgets
+#)
+#add_test(NAME TestMainWindow COMMAND TestMainWindow)
 
-add_executable(TestNetwork
-	test_network.cpp
-	network.cpp
-)
-target_link_libraries(TestNetwork
-	PRIVATE
-	Qt5::Test
-	Qt5::Gui
-	Qt5::Widgets
-	${TORCH_LIBRARIES}
-)
-add_test(NAME TestNetwork COMMAND TestNetwork)
+#add_executable(TestNetwork
+#	test_network.cpp
+#	network.cpp
+#)
+#target_link_libraries(TestNetwork
+#	PRIVATE
+#	Qt5::Test
+#	Qt5::Gui
+#	Qt5::Widgets
+#	${TORCH_LIBRARIES}
+#)
+#add_test(NAME TestNetwork COMMAND TestNetwork)
