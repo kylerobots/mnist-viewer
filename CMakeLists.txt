@@ -27,13 +27,23 @@ target_link_libraries(gui
 	Qt5::Widgets
 )
 
+add_library(network
+	network.cpp
+	network.h
+)
+target_link_libraries(network
+	PUBLIC
+	Qt5::Widgets
+	${TORCH_LIBRARIES}
+)
+
 add_executable(mnist-viewer
 	main.cpp
 #	mainwindow.cpp
 #	mainwindow.h
 #	mainwindow.ui
-	network.cpp
-	network.h
+#	network.cpp
+#	network.h
 #	trainingprogress.cpp
 #	trainingprogress.h
 #	trainingprogress.ui
@@ -41,8 +51,9 @@ add_executable(mnist-viewer
 target_link_libraries(mnist-viewer
 	PRIVATE
 	gui
+	network
 	Qt5::Widgets
-	${TORCH_LIBRARIES}
+#	${TORCH_LIBRARIES}
 )
 
 #enable_testing()
