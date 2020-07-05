@@ -2,6 +2,8 @@
 A simple GUI to view and train a neural network on MNIST using LibTorch (C++ Frontend for PyTorch). This project is primarily to practice all
 the tools and features of Qt and PyTorch.
 
+For full documentation, see https://kylerobots.github.io/mnist-viewer
+
 ## Compilation
 Currently, you have to have Qt, CMake, and MSVC. Use those to compile the project. Then, you can run the mnist-viewer executable.
 
