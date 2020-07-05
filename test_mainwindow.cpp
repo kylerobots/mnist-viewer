@@ -134,7 +134,7 @@ void TestMainWindow::updateImage() {
 	QFETCH(int, truth);
 	QFETCH(int, prediction);
 
-	//	test.displayExample(index, image, truth, prediction);
+	test.displayExample(index, image, truth, prediction);
 	QCOMPARE(test.ui->truth_label->text(), QString::number(truth));
 	QCOMPARE(test.ui->prediction_label->text(), QString::number(prediction));
 	QCOMPARE(test.ui->index_label->text(), QString("Image #") + QString::number(index));

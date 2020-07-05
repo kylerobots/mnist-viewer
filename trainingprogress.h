@@ -37,7 +37,7 @@ public:
 	 * \param epoch The current epoch. This will be used to calculate the percentage to display.
 	 * \param loss The current loss to display.
 	 */
-	//	void update(uint batch, uint epoch, float loss);
+	void update(uint batch, uint epoch, float loss);
 
 private:
 	/*!

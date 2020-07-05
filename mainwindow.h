@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-//#include "trainingprogress.h"
+#include "trainingprogress.h"
 
 #include <QImage>
 #include <QMainWindow>
@@ -50,7 +50,7 @@ public slots:
 	 * \param label The real label for the image.
 	 * \param prediction The network predicted label.
 	 */
-	//	void displayExample(int index, const QImage & image, int label, int prediction);
+	void displayExample(int index, const QImage & image, int label, int prediction);
 	/*!
      * \brief Called when an update has been received by the training network.
      * 
@@ -63,7 +63,7 @@ public slots:
      * \param total_epochs The total epochs for which this will run.
      * \param latest_loss The latest loss value from the network.
      */
-	//	void trainingUpdate(unsigned int batch, unsigned int total_batches, unsigned int epoch, unsigned int total_epochs, float latest_loss);
+	void trainingUpdate(unsigned int batch, unsigned int total_batches, unsigned int epoch, unsigned int total_epochs, float latest_loss);
 
 private:
 	/*!
@@ -72,14 +72,14 @@ private:
 	 * This method will emit a \ref iterateImage signal with a value of 1.
 	 * \param checked *Unused* If the button is depressed or not.
 	 */
-	//	void nextButtonClicked(bool checked);
+	void nextButtonClicked(bool checked);
 	/*!
 	 * \brief Called when the previous button emits a clicked event.
 	 * 
 	 * This method will emit a \ref iterateImage signal with a value of -1.
 	 * \param checked *Unused* If the button is deperessed or not.
 	 */
-	//	void previousButtonClicked(bool checked);
+	void previousButtonClicked(bool checked);
 	/*!
      * \brief Called when the training button emits a clicked event.
      * 
@@ -87,13 +87,13 @@ private:
      * will only request a batch size of one with an epoch of one.
      * \param checked *Unused* If the button is depressed or not.
      */
-	//	void trainButtonClicked(bool checked);
+	void trainButtonClicked(bool checked);
 
 private:
 	/*!
      * \brief The pointer to hold the secondary gui to display training progress.
      */
-	//	QScopedPointer<TrainingProgress> training_window;
+	QScopedPointer<TrainingProgress> training_window;
 	/*!
 	 * \brief The pointer to the GUI elements generated from the mainwindow.ui file.
 	 */
@@ -107,12 +107,12 @@ signals:
 	 * any integer, but in practice is either -1, 0, or 1.
 	 * \param difference The amount to increment the displayed image by.
 	 */
-	//	void iterateImage(int difference);
+	void iterateImage(int difference);
 	/*!
      * \brief Signals the connected \ref Network object to train the network.
      * \param batch_size The number of examples in each batch.
      * \param epochs The number of iterations to train on.
      */
-	//	void startTraining(unsigned int batch_size, unsigned int epochs);
+	void startTraining(unsigned int batch_size, unsigned int epochs);
 };
 #endif // MAINWINDOW_H
