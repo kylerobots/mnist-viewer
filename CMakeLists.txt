@@ -14,6 +14,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 find_package(torch REQUIRED)
 
+# A library for all the GUI elements
 add_library(gui
 	mainwindow.cpp
 	mainwindow.h
@@ -27,6 +28,7 @@ target_link_libraries(gui
 	Qt5::Widgets
 )
 
+# A library for the network backend.
 add_library(network
 	network.cpp
 	network.h
@@ -38,6 +40,7 @@ target_link_libraries(network
 	Qt5::Widgets
 )
 
+# The main function that brings everything together.
 add_executable(mnist-viewer
 	main.cpp
 )
@@ -48,29 +51,30 @@ target_link_libraries(mnist-viewer
 	Qt5::Widgets
 )
 
+# Unit tests
 enable_testing()
 find_package(Qt5Test REQUIRED)
 
-add_executable(TestMainWindow
+add_executable(test-gui
 	test_mainwindow.cpp
 )
-target_link_libraries(TestMainWindow
+target_link_libraries(test-gui
 	PRIVATE
 	gui
 	Qt5::Test
 	Qt5::Gui
 	Qt5::Widgets
 )
-add_test(NAME TestMainWindow COMMAND TestMainWindow)
+add_test(NAME test-gui COMMAND test-gui)
 
-add_executable(TestNetwork
+add_executable(test-network
 	test_network.cpp
 )
-target_link_libraries(TestNetwork
+target_link_libraries(test-network
 	PRIVATE
 	network
 	Qt5::Test
 	Qt5::Gui
 	Qt5::Widgets
 )
-add_test(NAME TestNetwork COMMAND TestNetwork)
+add_test(NAME test-network COMMAND test-network)
