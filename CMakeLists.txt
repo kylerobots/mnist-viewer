@@ -18,9 +18,9 @@ add_library(gui
 	mainwindow.cpp
 	mainwindow.h
 	mainwindow.ui
-#	trainingprogress.cpp
-#	trainingprogress.h
-#	trainingprogress.ui
+	trainingprogress.cpp
+	trainingprogress.h
+	trainingprogress.ui
 )
 target_link_libraries(gui
 	PRIVATE
@@ -33,44 +33,35 @@ add_library(network
 )
 target_link_libraries(network
 	PUBLIC
-	Qt5::Widgets
 	${TORCH_LIBRARIES}
+	PRIVATE
+	Qt5::Widgets
 )
 
 add_executable(mnist-viewer
 	main.cpp
-#	mainwindow.cpp
-#	mainwindow.h
-#	mainwindow.ui
-#	network.cpp
-#	network.h
-#	trainingprogress.cpp
-#	trainingprogress.h
-#	trainingprogress.ui
 )
 target_link_libraries(mnist-viewer
 	PRIVATE
 	gui
 	network
 	Qt5::Widgets
-#	${TORCH_LIBRARIES}
 )
 
 enable_testing()
 find_package(Qt5Test REQUIRED)
 
-#add_executable(TestMainWindow
-#	test_mainwindow.cpp
-#	mainwindow.cpp
-#	trainingprogress.cpp
-#)
-#target_link_libraries(TestMainWindow
-#	PRIVATE
-#	Qt5::Test
-#	Qt5::Gui
-#	Qt5::Widgets
-#)
-#add_test(NAME TestMainWindow COMMAND TestMainWindow)
+add_executable(TestMainWindow
+	test_mainwindow.cpp
+)
+target_link_libraries(TestMainWindow
+	PRIVATE
+	gui
+	Qt5::Test
+	Qt5::Gui
+	Qt5::Widgets
+)
+add_test(NAME TestMainWindow COMMAND TestMainWindow)
 
 add_executable(TestNetwork
 	test_network.cpp

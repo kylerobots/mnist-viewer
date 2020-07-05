@@ -28,7 +28,7 @@ class MainWindow : public QMainWindow {
      * \brief \ref TestMainWindow is a friend class so that it can properly test
      * \ref ui elements of this class.
      */
-	//	friend class TestMainWindow;
+	friend class TestMainWindow;
 
 public:
 	/*!
