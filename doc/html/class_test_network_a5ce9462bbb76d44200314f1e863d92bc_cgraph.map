@@ -1,0 +1,6 @@
+<map id="TestNetwork::cycleImage" name="TestNetwork::cycleImage">
+<area shape="rect" id="node1" title="The method that actually makes the comparisions in cycleImage_data." alt="" coords="5,5,173,32"/>
+<area shape="rect" id="node2" href="$class_network.html#adeeef709062e797fcf1a0e6d8cd18810" title="The slot that records when a new image should be predicted and displayed." alt="" coords="221,5,376,32"/>
+<area shape="rect" id="node3" href="$class_network.html#ae438d2367e76e8367ea63cf40a654006" title="The method to predict the image and output a example signal." alt="" coords="424,5,564,32"/>
+<area shape="rect" id="node4" href="$class_network.html#a918e8764ff7d1ec1075b4d7c03cbc637" title="Takes a Tensor and converts it into a QImage." alt="" coords="612,5,779,32"/>
+</map>

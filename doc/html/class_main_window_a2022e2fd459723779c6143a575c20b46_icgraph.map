@@ -1,0 +1,4 @@
+<map id="MainWindow::previousButtonClicked" name="MainWindow::previousButtonClicked">
+<area shape="rect" id="node1" title="Called when the previous button emits a clicked event." alt="" coords="232,5,421,47"/>
+<area shape="rect" id="node2" href="$class_main_window.html#a996c5a2b6f77944776856f08ec30858d" title="The default constructor." alt="" coords="5,13,184,39"/>
+</map>

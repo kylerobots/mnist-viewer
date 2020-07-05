@@ -1,0 +1,5 @@
+<map id="Network::startTraining" name="Network::startTraining">
+<area shape="rect" id="node1" title="The slot that requests to train the network on training data." alt="" coords="180,31,328,57"/>
+<area shape="rect" id="node2" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title="The main function for the mnist&#45;viewer executable." alt="" coords="43,5,94,32"/>
+<area shape="rect" id="node3" href="$class_test_network.html#a0726c399dc45edf0f1bed5ca91e6d92f" title="The method that actually makes the comparisons in train_data." alt="" coords="5,56,132,83"/>
+</map>

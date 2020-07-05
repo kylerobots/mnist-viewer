@@ -1,0 +1,7 @@
+<map id="Network::sendImage" name="Network::sendImage">
+<area shape="rect" id="node1" title="The method to predict the image and output a example signal." alt="" coords="424,56,564,83"/>
+<area shape="rect" id="node2" href="$class_network.html#adeeef709062e797fcf1a0e6d8cd18810" title="The slot that records when a new image should be predicted and displayed." alt="" coords="221,31,376,57"/>
+<area shape="rect" id="node5" href="$class_network.html#a0b2a0282570fcc47174e80030d0672e9" title="The default constructor." alt="" coords="237,81,361,108"/>
+<area shape="rect" id="node3" href="$class_test_network.html#a5ce9462bbb76d44200314f1e863d92bc" title="The method that actually makes the comparisions in cycleImage_data." alt="" coords="5,5,173,32"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title="The main function for the mnist&#45;viewer executable." alt="" coords="64,56,115,83"/>
+</map>
