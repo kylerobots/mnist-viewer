@@ -1,9 +1,0 @@
-<map id="main" name="main">
-<area shape="rect" id="node1" title="The main function for the mnist&#45;viewer executable." alt="" coords="5,81,56,108"/>
-<area shape="rect" id="node2" href="$class_network.html#adeeef709062e797fcf1a0e6d8cd18810" title="The slot that records when a new image should be predicted and displayed." alt="" coords="125,5,279,32"/>
-<area shape="rect" id="node5" href="$class_main_window.html#a2654e7f17bc5939e6faf2b5b0f1a7e14" title="Receive an image, its actual label, and its predicted label for publishing to the screen." alt="" coords="104,56,300,83"/>
-<area shape="rect" id="node6" href="$class_network.html#ae713382eb8476d14c48028e1582365ff" title="The slot that requests to train the network on training data." alt="" coords="128,107,276,133"/>
-<area shape="rect" id="node7" href="$class_main_window.html#a309afcea5fb46e7d9147f8d1d34bd4ae" title="Called when an update has been received by the training network." alt="" coords="109,157,295,184"/>
-<area shape="rect" id="node3" href="$class_network.html#ae438d2367e76e8367ea63cf40a654006" title="The method to predict the image and output a example signal." alt="" coords="348,5,488,32"/>
-<area shape="rect" id="node4" href="$class_network.html#a918e8764ff7d1ec1075b4d7c03cbc637" title="Takes a Tensor and converts it into a QImage." alt="" coords="536,5,703,32"/>
-</map>

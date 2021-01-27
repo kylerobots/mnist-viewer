@@ -1,5 +1,0 @@
-<map id="TestNetwork" name="TestNetwork">
-<area shape="rect" id="node1" title="The TestNetwork class is used to test Network." alt="" coords="5,171,100,197"/>
-<area shape="rect" id="node2" title=" " alt="" coords="12,5,83,32"/>
-<area shape="rect" id="node3" href="$class_network.html" title="The backend class that handles data flow into and out of the network." alt="" coords="69,81,138,108"/>
-</map>
