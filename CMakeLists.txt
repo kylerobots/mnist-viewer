@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(mnist-viewer VERSION 1.0.0.0 LANGUAGES CXX)
+project(mnist-viewer VERSION 0.5.0.0 LANGUAGES CXX)
 
 # These are all needed throughout the project, so are set globally.
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
