@@ -1,4 +1,0 @@
-<map id="TestNetwork::train" name="TestNetwork::train">
-<area shape="rect" id="node1" title="The method that actually makes the comparisons in train_data." alt="" coords="5,5,132,32"/>
-<area shape="rect" id="node2" href="$class_network.html#ae713382eb8476d14c48028e1582365ff" title="The slot that requests to train the network on training data." alt="" coords="180,5,328,32"/>
-</map>

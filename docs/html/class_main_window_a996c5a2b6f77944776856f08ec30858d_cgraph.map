@@ -1,6 +1,0 @@
-<map id="MainWindow::MainWindow" name="MainWindow::MainWindow">
-<area shape="rect" id="node1" title="The default constructor." alt="" coords="5,64,184,91"/>
-<area shape="rect" id="node2" href="$class_main_window.html#a3567e6730c66b0ea07dce173030e14ea" title="Called when the next button emits a clicked event." alt="" coords="232,5,443,32"/>
-<area shape="rect" id="node3" href="$class_main_window.html#a2022e2fd459723779c6143a575c20b46" title="Called when the previous button emits a clicked event." alt="" coords="243,57,432,98"/>
-<area shape="rect" id="node4" href="$class_main_window.html#a295503fa2bed64e248b747554e0ab1de" title="Called when the training button emits a clicked event." alt="" coords="232,123,443,149"/>
-</map>

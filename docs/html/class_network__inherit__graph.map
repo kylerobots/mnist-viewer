@@ -1,4 +1,0 @@
-<map id="Network" name="Network">
-<area shape="rect" id="node1" title="The backend class that handles data flow into and out of the network." alt="" coords="6,80,75,107"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,5,76,32"/>
-</map>

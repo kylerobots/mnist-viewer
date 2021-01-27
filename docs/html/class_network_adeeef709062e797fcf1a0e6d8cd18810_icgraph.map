@@ -1,5 +1,0 @@
-<map id="Network::changeImage" name="Network::changeImage">
-<area shape="rect" id="node1" title="The slot that records when a new image should be predicted and displayed." alt="" coords="221,31,376,57"/>
-<area shape="rect" id="node2" href="$class_test_network.html#a5ce9462bbb76d44200314f1e863d92bc" title="The method that actually makes the comparisions in cycleImage_data." alt="" coords="5,5,173,32"/>
-<area shape="rect" id="node3" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title="The main function for the mnist&#45;viewer executable." alt="" coords="64,56,115,83"/>
-</map>

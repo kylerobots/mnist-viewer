@@ -1,6 +1,0 @@
-<map id="MainWindow::startTraining" name="MainWindow::startTraining">
-<area shape="rect" id="node1" title="Signals the connected Network object to train the network." alt="" coords="491,31,665,57"/>
-<area shape="rect" id="node2" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title="The main function for the mnist&#45;viewer executable." alt="" coords="312,5,363,32"/>
-<area shape="rect" id="node3" href="$class_main_window.html#a295503fa2bed64e248b747554e0ab1de" title="Called when the training button emits a clicked event." alt="" coords="232,56,443,83"/>
-<area shape="rect" id="node4" href="$class_main_window.html#a996c5a2b6f77944776856f08ec30858d" title="The default constructor." alt="" coords="5,56,184,83"/>
-</map>

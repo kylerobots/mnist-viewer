@@ -1,4 +1,0 @@
-<map id="TestMainWindow::updateImage" name="TestMainWindow::updateImage">
-<area shape="rect" id="node1" title="The method that actually makes the comparisions in updateImage_data." alt="" coords="5,5,208,32"/>
-<area shape="rect" id="node2" href="$class_main_window.html#a2654e7f17bc5939e6faf2b5b0f1a7e14" title="Receive an image, its actual label, and its predicted label for publishing to the screen." alt="" coords="256,5,452,32"/>
-</map>
